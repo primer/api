@@ -1,0 +1,5 @@
+# Prisma schema documentation: https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#model
+
+model Component {
+  name String
+}
