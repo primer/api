@@ -1,0 +1,45 @@
+// Reference: https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#model
+
+model Framework {
+  id         Int         @id @default(autoincrement())
+  name       String
+  components Component[]
+}
+
+model Component {
+  id                          Int        @id @default(autoincrement())
+  name                        String     @unique
+  description                 String
+  design_status               Status[]
+  interface_guidelines_status Status[]
+  Framework                   Framework? @relation(fields: [frameworkId], references: [id])
+  frameworkId                 Int?
+  design_tokens               Token[] // mike's data models
+  properties                  Property[]
+}
+
+model Status {
+  id          Int    @id @default(autoincrement())
+  name        String @unique
+  description String
+}
+
+model Property {
+  id          Int    @id @default(autoincrement())
+  name        String @unique
+  description String
+  options     String
+  default     String
+}
+
+// each component has a table for frameworks with rows for each
+model ComponentFramework {
+  id            Int       @id @default(autoincrement())
+  framework     Framework @relation(fields: [frameworkId], references: [id])
+  frameworkId   Int?
+  lifecycle     Status[]
+  documentation Status[]
+  usage_count   Int
+  release_date  DateTime
+  last_updated  DateTime
+}
