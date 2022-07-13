@@ -1,5 +1,139 @@
 // Reference: https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#model
 
-model Component {
-  name String
+// -----------------------------------------------------------------------------
+// Design tokens
+// -----------------------------------------------------------------------------
+
+model DesignToken {
+  id           String             @id @default(cuid())
+  name         String             @unique
+  description  String?
+  deprecated   Boolean            @default(false)
+  values       DesignTokenValue[]
+  referencedBy DesignTokenValue[] @relation("Reference") // Other design token values that reference this design token
+  components   ComponentSpec[] // Components that use this design token
+  // category
+}
+
+model DesignTokenValue {
+  id            String        @id @default(cuid())
+  designToken   DesignToken   @relation(fields: [designTokenId], references: [id])
+  designTokenId String
+  theme         Theme         @relation(fields: [themeId], references: [id])
+  themeId       String
+  originalValue String
+  computedValue String
+  references    DesignToken[] @relation("Reference") // Other design tokens that this design token value references
+}
+
+model Theme {
+  id           String             @id @default(cuid())
+  name         String             @unique
+  description  String?
+  designTokens DesignTokenValue[]
+}
+
+// -----------------------------------------------------------------------------
+// Components
+// -----------------------------------------------------------------------------
+
+// Component design spec
+model ComponentSpec {
+  id            String          @id @default(cuid())
+  name          String          @unique
+  description   String? // Should this be required?
+  implementedBy ComponentImpl[]
+  designTokens  DesignToken[] // Design tokens that are used by this component
+  octicons      Octicon[] // Octicons that are used by this component
+  // What are the possible statuses of a component spec?
+  // What else should a spec include? A11y guidance?
+}
+
+// Implementation of a component design spec
+model ComponentImpl {
+  id                String                      @id @default(cuid())
+  framework         ComponentFramework
+  frameworkMetadata ComponentFrameworkMetadata  @relation(fields: [framework], references: [framework])
+  status            ComponentImplStatus
+  statusMetadata    ComponentImplStatusMetadata @relation(fields: [status], references: [status])
+  name              String                      @unique
+  description       String? // If not provided, fallback to component spec description 
+  source            String? // Link to source code in GitHub
+  props             ComponentProp[]
+  examples          ComponentExample[]
+  childComponents   ComponentImpl[]             @relation("ParentChild")
+  parentComponent   ComponentImpl?              @relation("ParentChild", fields: [parentComponentId], references: [id])
+  parentComponentId String?
+  spec              ComponentSpec?              @relation(fields: [specId], references: [id])
+  specId            String?
+}
+
+// Is "framework" the right name?
+enum ComponentFramework {
+  REACT
+  RAILS
+  FIGMA
+}
+
+model ComponentFrameworkMetadata {
+  id          String             @id @default(cuid())
+  framework   ComponentFramework @unique
+  description String
+  components  ComponentImpl[]
+}
+
+// Where do "draft" and "experimental" fit?
+enum ComponentImplStatus {
+  DRAFT
+  ALPHA
+  BETA
+  STABLE
+  DEPRECATED
+  REMOVED
+}
+
+model ComponentImplStatusMetadata {
+  id          String              @id @default(cuid())
+  status      ComponentImplStatus @unique
+  description String
+  components  ComponentImpl[]
+}
+
+model ComponentProp {
+  id          String        @id @default(cuid())
+  name        String
+  type        String?
+  default     String?
+  description String?
+  component   ComponentImpl @relation(fields: [componentId], references: [id])
+  componentId String
+}
+
+model ComponentExample {
+  id          String        @id @default(cuid())
+  name        String
+  description String?
+  code        String
+  component   ComponentImpl @relation(fields: [componentId], references: [id])
+  componentId String
+}
+
+// -----------------------------------------------------------------------------
+// Octicons
+// -----------------------------------------------------------------------------
+
+model Octicon {
+  id          String          @id @default(cuid())
+  name        String          @unique
+  description String?
+  components  ComponentSpec[] // Components that use this octicon
+  sizes       OcticonSize[]
+}
+
+model OcticonSize {
+  id        String  @id @default(cuid())
+  octicon   Octicon @relation(fields: [octiconId], references: [id])
+  octiconId String
+  size      Int
+  path      String // SVG path of the octicon
 }
