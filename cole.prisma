@@ -42,7 +42,7 @@ model ComponentSpec {
   id            String          @id @default(cuid())
   name          String          @unique
   description   String? // Should this be required?
-  implementedBy ComponentImpl[]
+  implementions ComponentImpl[]
   designTokens  DesignToken[] // Design tokens that are used by this component
   octicons      Octicon[] // Octicons that are used by this component
   // What are the possible statuses of a component spec?
