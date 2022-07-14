@@ -1,5 +1,7 @@
 # Primer API
 
+A [GraphQL](https://graphql.org/) API for querying and mutating Primer data
+
 ## Technology stack
 * [Apollo Server](https://www.apollographql.com/docs/apollo-server/) for running the GraphQL server
 * [Prisma](https://www.prisma.io/) for defining the data schema
