@@ -1,0 +1,95 @@
+// Reference: https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#model
+
+enum Themes {
+    LIGHT
+    LIGHT_HIGHCONTRAST
+    LIGHT_COLORBLIND
+    LIGHT_TRITANOPIA
+    DARK
+    DARK_DIMMED
+    DARK_HIGHCONTRAST
+    DARK_COLORBLIND
+    DARK_TRITANOPIA
+}
+
+// TODO: do more thinking on token types
+enum TokenTypes {
+    COLOR
+    DIMENSION
+    TYPOGRAPHY
+    DURATION
+    CUBIC_BEZIER
+}
+
+model TokenAttributes {
+    id         String @id @default(cuid())
+    token      Token? // I don't want this field in here. It's just here for the @relation to work.
+    namespace  String
+    item       String
+    variant    String
+    property   String
+    modifier   String
+}
+
+model TokenModeData {
+    id        String       @id @default(cuid())
+    value     String
+    comment   String?
+    rawValue  String
+}
+
+model TokenModes {
+    id                 String         @id @default(cuid()) // I don't want this field in here. It's just here to silence an error
+    light              TokenModeData  @relation(fields: [id], references: [id])
+    lightHighContrast  TokenModeData  @relation(fields: [id], references: [id])
+    lightColorBlind    TokenModeData  @relation(fields: [id], references: [id])
+    lightTritantopia   TokenModeData  @relation(fields: [id], references: [id])
+    dark               TokenModeData  @relation(fields: [id], references: [id])
+    darkDimmed         TokenModeData  @relation(fields: [id], references: [id])
+    darkHighContrast   TokenModeData  @relation(fields: [id], references: [id])
+    darkColorBlind     TokenModeData  @relation(fields: [id], references: [id])
+    darkTritantopia    TokenModeData  @relation(fields: [id], references: [id])
+}
+
+model Token {
+    id              String              @id @default(cuid())
+
+    // An array of tokens that alias this token
+    aliasedBy       Token[]
+
+    // An object that describes the taxonomy of the token
+    classification  TokenAttributes     @relation(fields: [id], references: [id])
+
+    // A brief description of the token
+    comment         String
+
+    // A note explaining what to do for a deprecated token
+    deprecationNotice String?
+
+    // The file path of the file the token is defined in
+    filePath        String
+
+    // Whether this token is a an alias of another token
+    isAlias         Boolean             @default(false)
+
+    // How this token is defined in different themes
+    modes           TokenModes          @relation(fields: [id], references: [id]) // This property causes weird things to happen with formatting on save
+
+    // The common name used to refer to the token
+    name            String              @unique
+
+    // The object path of the design token as defined in style-dictionary
+    path            String[]
+
+    // The literal value of the token. For example, if the token is an alias of 'colors.scale.black', the raw value is '#000000'
+    rawValue        String
+
+    // The theme context this token was retrieved from
+    theme           Themes
+
+    // What kind of value the token represents. Inspired by the W3C design token spec draft https://design-tokens.github.io/community-group/format/#types
+    type            TokenTypes
+
+    // The value used to define the token in style-dictionary. This could be an alias (e.g., '{colors.scale.black}') or a literal value (e.g., '#000000')
+    value           String
+}
