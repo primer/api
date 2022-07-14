@@ -1,4 +1,10 @@
-# Primer Schema
+# Primer API
+
+## Technology stack
+* [Apollo Server](https://www.apollographql.com/docs/apollo-server/) for running the GraphQL server
+* [Prisma](https://www.prisma.io/) for defining the data schema
+* [TypeGraphQL Prisma](https://prisma.typegraphql.com/) for generating a GraphQL API from our Prisma schema
+* [Supabase](https://supabase.com) for hosting the PostgreSQL database
 
 ## Local development
 
