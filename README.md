@@ -25,6 +25,14 @@
 
    The `DATABASE_URL` variable should be set to a connection string for a PostgreSQL database. Ask @colebemis, @langermank, or @mperrotti for the connection string.
 
+### Run local GraphQL server
+
+```shell
+npm run start
+```
+
+The GraphQL server will be available at http://localhost:4000.
+
 ### Publish schema changes
 
 1. Make changes to the database schema in `prisma/schema.prisma`

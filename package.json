@@ -1,21 +1,23 @@
 {
   "private": true,
-  "name": "primer-schema",
+  "name": "primer-api",
   "version": "0.0.0",
   "description": "",
   "scripts": {
     "migrate": "prisma migrate dev"
   },
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
+    "@prisma/client": "^4.0.0",
     "@types/node": "^18.0.3",
+    "apollo-server": "^3.10.0",
     "prettier": "2.7.1",
     "prettier-plugin-prisma": "^4.1.0",
     "prisma": "^4.0.0",
-    "ts-node": "^10.8.2",
+    "reflect-metadata": "^0.1.13",
+    "ts-node": "^10.9.1",
+    "type-graphql": "^1.1.1",
+    "typegraphql-prisma": "^0.21.0",
     "typescript": "^4.7.4"
-  },
-  "dependencies": {
-    "@prisma/client": "^4.0.0"
   }
 }
