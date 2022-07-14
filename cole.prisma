@@ -5,14 +5,15 @@
 // -----------------------------------------------------------------------------
 
 model DesignToken {
-  id           String             @id @default(cuid())
-  name         String             @unique
-  description  String?
-  deprecated   Boolean            @default(false)
-  values       DesignTokenValue[]
-  referencedBy DesignTokenValue[] @relation("Reference") // Other design token values that reference this design token
-  components   ComponentSpec[] // Components that use this design token
-  // category
+  id               String             @id @default(cuid())
+  name             String             @unique
+  description      String?
+  deprecated       Boolean            @default(false)
+  values           DesignTokenValue[]
+  referencedBy     DesignTokenValue[] @relation("Reference") // Other design token values that reference this design token
+  usedByComponents Component[] // Components that use this design token
+  // TODO: category/filepath/classification/type
+  // TODO: replacements/decpecation message
 }
 
 model DesignTokenValue {
@@ -37,14 +38,13 @@ model Theme {
 // Components
 // -----------------------------------------------------------------------------
 
-// Component design spec
-model ComponentSpec {
-  id            String          @id @default(cuid())
-  name          String          @unique
-  description   String? // Should this be required?
-  implementions ComponentImpl[]
-  designTokens  DesignToken[] // Design tokens that are used by this component
-  octicons      Octicon[] // Octicons that are used by this component
+model Component {
+  id               String          @id @default(cuid())
+  name             String          @unique
+  description      String? // Should this be required?
+  implementions    ComponentImpl[]
+  designTokensUsed DesignToken[] // Design tokens that are used by this component
+  octiconsUsed     Octicon[] // Octicons that are used by this component
   // What are the possible statuses of a component spec?
   // What else should a spec include? A11y guidance?
 }
@@ -64,8 +64,10 @@ model ComponentImpl {
   childComponents   ComponentImpl[]             @relation("ParentChild")
   parentComponent   ComponentImpl?              @relation("ParentChild", fields: [parentComponentId], references: [id])
   parentComponentId String?
-  spec              ComponentSpec?              @relation(fields: [specId], references: [id])
-  specId            String?
+  // TODO: Clarify naming
+  component         Component?                  @relation(fields: [componentId], references: [id])
+  componentId       String?
+  // TODO: private
 }
 
 // Is "framework" the right name?
@@ -104,6 +106,8 @@ model ComponentProp {
   name        String
   type        String?
   default     String?
+  required    Boolean       @default(false)
+  deprecated  Boolean       @default(false)
   description String?
   component   ComponentImpl @relation(fields: [componentId], references: [id])
   componentId String
@@ -123,11 +127,11 @@ model ComponentExample {
 // -----------------------------------------------------------------------------
 
 model Octicon {
-  id          String          @id @default(cuid())
-  name        String          @unique
-  description String?
-  components  ComponentSpec[] // Components that use this octicon
-  sizes       OcticonSize[]
+  id               String        @id @default(cuid())
+  name             String        @unique
+  description      String?
+  usedByComponents Component[] // Components that use this octicon
+  sizes            OcticonSize[]
 }
 
 model OcticonSize {
