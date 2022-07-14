@@ -2,7 +2,7 @@
 
 > **Warning**: Experimental
 
-A [GraphQL](https://graphql.org/) API for querying and mutating data about the [Primer Design System](https://primer.style)
+A [GraphQL](https://graphql.org/) API for collecting and accessing data about the [Primer Design System](https://primer.style)
 
 ## Data flow
 
