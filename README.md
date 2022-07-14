@@ -6,8 +6,7 @@ A [GraphQL](https://graphql.org/) API for querying and mutating data about the [
 
 ## Data flow
 
-<img width="1224" alt="Data flow diagram" src="https://user-images.githubusercontent.com/4608155/179075151-410dd7b4-b18e-4c4f-9707-5479c278e102.png">
-
+![Data flow diagram](https://user-images.githubusercontent.com/4608155/179081755-468c01aa-72b1-43e3-a472-f864a5494a52.png)
 
 ## Technology stack
 * [Apollo Server](https://www.apollographql.com/docs/apollo-server/) for running the GraphQL server
