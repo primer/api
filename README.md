@@ -1,5 +1,7 @@
 # Primer API
 
+> **Warning**: Experimental
+
 A [GraphQL](https://graphql.org/) API for querying and mutating data about the [Primer Design System](https://primer.style)
 
 ## Technology stack
