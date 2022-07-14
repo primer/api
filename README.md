@@ -4,6 +4,11 @@
 
 A [GraphQL](https://graphql.org/) API for querying and mutating data about the [Primer Design System](https://primer.style)
 
+## Data flow
+
+<img width="1224" alt="Data flow diagram" src="https://user-images.githubusercontent.com/4608155/179075151-410dd7b4-b18e-4c4f-9707-5479c278e102.png">
+
+
 ## Technology stack
 * [Apollo Server](https://www.apollographql.com/docs/apollo-server/) for running the GraphQL server
 * [Prisma](https://www.prisma.io/) for defining the data schema
