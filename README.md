@@ -1,4 +1,4 @@
-# Primer Schema
+# Primer API
 
 ## Local development
 
