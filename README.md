@@ -1,5 +1,13 @@
 # Primer API
 
+> **Warning**: Experimental
+
+A [GraphQL](https://graphql.org/) API for collecting and accessing data about the [Primer Design System](https://primer.style)
+
+## Data flow
+
+![Data flow diagram](https://user-images.githubusercontent.com/4608155/179082139-9fc96339-bcd2-4171-a02c-6b693d7fa4eb.png)
+
 ## Technology stack
 * [Apollo Server](https://www.apollographql.com/docs/apollo-server/) for running the GraphQL server
 * [Prisma](https://www.prisma.io/) for defining the data schema
