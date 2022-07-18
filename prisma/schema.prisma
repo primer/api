@@ -68,6 +68,9 @@ model ComponentImpl {
   // Status of the implementation
   status ComponentImplStatusEnum
 
+  // Additional details about the status
+  // statusMessage String?
+
   // Link to the source code for the component in GitHub
   source String?
 
@@ -94,9 +97,10 @@ enum ComponentImplStatusEnum {
 // - NOT_PLANNED
 // - PLANNED
 // - IN_PROGRESS
+// - IN_REVIEW
 // - READY
 // - NEEDS_WORK
-// - NOT_RECOMMENDED
+// - DEPRECATED
 
 // -----------------------------------------------------------------------------
 // Octicons
