@@ -2,11 +2,12 @@
   "name": "primer-api",
   "workspaces": [
     "api",
-    "examples/docs"
+    "examples/docs",
+    "examples/raycast"
   ],
   "scripts": {
     "setup": "./bin/setup.sh",
-    "dev": "concurrently -n api,docs \"npm run dev --w api\" \"npm run dev --w docs\""
+    "dev": "concurrently -n api,docs,raycast \"npm run dev --w api\" \"npm run dev --w docs\" \"npm run dev --w raycast\""
   },
   "devDependencies": {
     "concurrently": "^7.3.0"

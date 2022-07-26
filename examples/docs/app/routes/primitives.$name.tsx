@@ -53,7 +53,8 @@ export default function ComponentPage() {
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
       <h1>{data.designToken.name}</h1>
       <pre>{JSON.stringify(data, null, 2)}</pre>
-      {/* <h2>Used by</h2>
+
+      <h2>Used by</h2>
       <ul>
         {data.designToken.usedByComponents.map(({ name }) => (
           <li key={name}>
@@ -66,7 +67,7 @@ export default function ComponentPage() {
             </Link>
           </li>
         ))}
-      </ul> */}
+      </ul>
     </div>
   );
 }
