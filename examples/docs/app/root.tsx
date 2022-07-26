@@ -2,11 +2,12 @@ import { MarkGithubIcon } from "@primer/octicons-react";
 import {
   BaseStyles,
   Box,
+  Label,
   NavList,
   PageLayout,
+  SSRProvider,
   Text,
   ThemeProvider,
-  SSRProvider,
 } from "@primer/react";
 import type { MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
@@ -63,19 +64,24 @@ export default function App() {
             <BaseStyles>
               <PageLayout containerWidth="full">
                 <PageLayout.Header>
-                  <Box
-                    as={Link}
-                    to="/"
-                    sx={{
-                      color: "fg.default",
-                      display: "flex",
-                      gap: 2,
-                      textDecoration: "none",
-                      alignItems: "center",
-                    }}
-                  >
-                    <MarkGithubIcon size="medium" />
-                    <Text sx={{ fontSize: 3, fontWeight: "bold" }}>Primer</Text>
+                  <Box sx={{ display: "flex", gap: 3, alignItems: "center" }}>
+                    <Box
+                      as={Link}
+                      to="/"
+                      sx={{
+                        color: "fg.default",
+                        display: "flex",
+                        gap: 2,
+                        textDecoration: "none",
+                        alignItems: "center",
+                      }}
+                    >
+                      <MarkGithubIcon size="medium" />
+                      <Text sx={{ fontSize: 3, fontWeight: "bold" }}>
+                        Primer
+                      </Text>
+                    </Box>
+                    <Label variant="attention">DEMO</Label>
                   </Box>
                 </PageLayout.Header>
                 <PageLayout.Pane position="start">
