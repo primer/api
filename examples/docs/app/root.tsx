@@ -86,6 +86,7 @@ export default function App() {
                 </PageLayout.Header>
                 <PageLayout.Pane position="start">
                   <NavList>
+                    <NavList.Item href="/primitives">Primitives</NavList.Item>
                     <NavList.Item href="/octicons">Octicons</NavList.Item>
                     <NavList.Group title="Components">
                       {data.components
