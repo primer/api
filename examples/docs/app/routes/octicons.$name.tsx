@@ -11,6 +11,10 @@ export const meta: MetaFunction = ({ params }) => ({
 type LoaderData = {
   octicon: {
     name: string;
+    description: string;
+    usedByComponents: Array<{
+      name: string;
+    }>;
   };
 };
 
@@ -28,6 +32,10 @@ export const loader: LoaderFunction = async ({ params }) => {
       query ($name: String!) {
         octicon(where: { name: $name }) {
           name
+          description
+          usedByComponents {
+            name
+          }
         }
       }
     `,

@@ -6,7 +6,7 @@ import { Link as RemixLink, useLoaderData } from "@remix-run/react";
 import { Link } from "@primer/react";
 
 export const meta: MetaFunction = ({ params }) => ({
-  title: `${sentenceCase(params.name || "")} | Primer`,
+  title: `Octicons | Primer`,
 });
 
 // TODO: Generate this type from the GraphQL schema
