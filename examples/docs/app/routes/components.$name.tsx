@@ -66,7 +66,7 @@ export default function ComponentPage() {
       <h1>{data.component.name}</h1>
       <pre>{JSON.stringify(data, null, 2)}</pre>
 
-      <h2>Uses</h2>
+      {/* <h2>Uses</h2>
 
       <h3>Primitives</h3>
       <ul>
@@ -77,7 +77,7 @@ export default function ComponentPage() {
             </Link>
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 }
