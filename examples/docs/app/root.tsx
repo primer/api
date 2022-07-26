@@ -1,5 +1,16 @@
-import type { MetaFunction } from "@remix-run/node";
+import { MarkGithubIcon } from "@primer/octicons-react";
 import {
+  BaseStyles,
+  Box,
+  NavList,
+  PageLayout,
+  Text,
+  ThemeProvider,
+} from "@primer/react";
+import type { MetaFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import {
+  Link,
   Links,
   LiveReload,
   Meta,
@@ -8,11 +19,9 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
-import { json } from "@remix-run/node";
+import { paramCase } from "change-case";
 import { gql } from "graphql-request";
 import { primerApi } from "~/primer-api-client";
-import { paramCase } from "change-case";
-import { ThemeProvider, BaseStyles, NavList, PageLayout } from "@primer/react";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -51,6 +60,22 @@ export default function App() {
         <ThemeProvider>
           <BaseStyles>
             <PageLayout containerWidth="full">
+              <PageLayout.Header>
+                <Box
+                  as={Link}
+                  to="/"
+                  sx={{
+                    color: "fg.default",
+                    display: "flex",
+                    gap: 2,
+                    textDecoration: "none",
+                    alignItems: "center",
+                  }}
+                >
+                  <MarkGithubIcon size="medium" />
+                  <Text sx={{ fontSize: 3, fontWeight: "bold" }}>Primer</Text>
+                </Box>
+              </PageLayout.Header>
               <PageLayout.Pane position="start">
                 <NavList>
                   <NavList.Group title="Components">

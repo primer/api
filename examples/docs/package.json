@@ -8,6 +8,7 @@
     "start": "remix-serve build"
   },
   "dependencies": {
+    "@primer/octicons-react": "^17.3.0",
     "@primer/react": "^35.5.0",
     "@remix-run/node": "^1.6.5",
     "@remix-run/react": "^1.6.5",
