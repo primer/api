@@ -23,6 +23,7 @@ import {
 } from "@remix-run/react";
 import { paramCase } from "change-case";
 import { gql } from "graphql-request";
+import { useMatch, useResolvedPath } from "react-router-dom";
 import { primerApi } from "~/primer-api-client";
 
 export const meta: MetaFunction = () => ({
@@ -86,18 +87,18 @@ export default function App() {
                 </PageLayout.Header>
                 <PageLayout.Pane position="start">
                   <NavList>
-                    <NavList.Item href="/primitives">Primitives</NavList.Item>
-                    <NavList.Item href="/octicons">Octicons</NavList.Item>
+                    <NavItem to="/primitives">Primitives</NavItem>
+                    <NavItem to="/octicons">Octicons</NavItem>
                     <NavList.Group title="Components">
                       {data.components
                         .sort((a, b) => (a.name > b.name ? 1 : -1))
                         .map(({ name }) => (
-                          <NavList.Item
+                          <NavItem
                             key={name}
-                            href={`/components/${paramCase(name)}`}
+                            to={`/components/${paramCase(name)}`}
                           >
                             {name}
-                          </NavList.Item>
+                          </NavItem>
                         ))}
                     </NavList.Group>
                   </NavList>
@@ -114,5 +115,19 @@ export default function App() {
         </SSRProvider>
       </body>
     </html>
+  );
+}
+
+function NavItem({ to, children }: { to: string; children: React.ReactNode }) {
+  const resolved = useResolvedPath(to);
+  const isCurrent = useMatch({ path: resolved.pathname, end: true });
+  return (
+    <NavList.Item
+      as={Link}
+      to={to}
+      aria-current={isCurrent ? "page" : undefined}
+    >
+      {children}
+    </NavList.Item>
   );
 }
