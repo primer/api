@@ -6,6 +6,7 @@ import {
   PageLayout,
   Text,
   ThemeProvider,
+  SSRProvider,
 } from "@primer/react";
 import type { MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
@@ -57,47 +58,52 @@ export default function App() {
         {typeof document === "undefined" ? "__STYLES__" : null}
       </head>
       <body>
-        <ThemeProvider>
-          <BaseStyles>
-            <PageLayout containerWidth="full">
-              <PageLayout.Header>
-                <Box
-                  as={Link}
-                  to="/"
-                  sx={{
-                    color: "fg.default",
-                    display: "flex",
-                    gap: 2,
-                    textDecoration: "none",
-                    alignItems: "center",
-                  }}
-                >
-                  <MarkGithubIcon size="medium" />
-                  <Text sx={{ fontSize: 3, fontWeight: "bold" }}>Primer</Text>
-                </Box>
-              </PageLayout.Header>
-              <PageLayout.Pane position="start">
-                <NavList>
-                  <NavList.Group title="Components">
-                    {data.components
-                      .sort((a, b) => (a.name > b.name ? 1 : -1))
-                      .map(({ name }) => (
-                        <NavList.Item key={name} href={`/${paramCase(name)}`}>
-                          {name}
-                        </NavList.Item>
-                      ))}
-                  </NavList.Group>
-                </NavList>
-              </PageLayout.Pane>
-              <PageLayout.Content>
-                <Outlet />
-              </PageLayout.Content>
-            </PageLayout>
-          </BaseStyles>
-          <ScrollRestoration />
-          <Scripts />
-          <LiveReload />
-        </ThemeProvider>
+        <SSRProvider>
+          <ThemeProvider>
+            <BaseStyles>
+              <PageLayout containerWidth="full">
+                <PageLayout.Header>
+                  <Box
+                    as={Link}
+                    to="/"
+                    sx={{
+                      color: "fg.default",
+                      display: "flex",
+                      gap: 2,
+                      textDecoration: "none",
+                      alignItems: "center",
+                    }}
+                  >
+                    <MarkGithubIcon size="medium" />
+                    <Text sx={{ fontSize: 3, fontWeight: "bold" }}>Primer</Text>
+                  </Box>
+                </PageLayout.Header>
+                <PageLayout.Pane position="start">
+                  <NavList>
+                    <NavList.Group title="Components">
+                      {data.components
+                        .sort((a, b) => (a.name > b.name ? 1 : -1))
+                        .map(({ name }) => (
+                          <NavList.Item
+                            key={name}
+                            href={`/components/${paramCase(name)}`}
+                          >
+                            {name}
+                          </NavList.Item>
+                        ))}
+                    </NavList.Group>
+                  </NavList>
+                </PageLayout.Pane>
+                <PageLayout.Content>
+                  <Outlet />
+                </PageLayout.Content>
+              </PageLayout>
+            </BaseStyles>
+            <ScrollRestoration />
+            <Scripts />
+            <LiveReload />
+          </ThemeProvider>
+        </SSRProvider>
       </body>
     </html>
   );
