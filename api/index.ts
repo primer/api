@@ -21,9 +21,10 @@ async function main() {
     schema,
     context: (): Context => ({ prisma }),
   });
+
   // TODO: Deploy to Azure
   const { port } = await server.listen(4000);
-  console.log(`GraphQL is listening on ${port}`);
+  console.log(`GraphQL server started at http://localhost:${port}`);
 }
 
 main().catch(console.error);
