@@ -44,11 +44,16 @@ A [GraphQL](https://graphql.org/) API for collecting and accessing data about th
 
 ### Run locally
 
-```shell
-npm run start
-```
+1. Run the `start` script:
 
-The GraphQL server will be available at http://localhost:4000.
+   ```shell
+   npm run start
+   ```
+
+   This will start the following servers locally:
+
+   - GraphQL API: http://localhost:4000
+   - Docs example: http://localhost:3000
 
 ### Publish schema changes
 

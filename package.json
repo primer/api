@@ -1,10 +1,14 @@
 {
   "name": "primer-api",
   "workspaces": [
-    "api"
+    "api",
+    "examples/docs"
   ],
   "scripts": {
     "setup": "./bin/setup.sh",
-    "dev": "npm run dev --workspace api"
+    "dev": "concurrently -n api,docs \"npm run dev --w api\" \"npm run dev --w docs\""
+  },
+  "devDependencies": {
+    "concurrently": "^7.3.0"
   }
 }
