@@ -24,6 +24,12 @@ model DesignToken {
   // Name of the design token
   name String @unique
 
+  // Raw value of the design token
+  rawValue String @default("")
+
+  // Type of the design token
+  type TokenType @default(COLOR)
+
   // Description of the design token
   description String?
 
@@ -62,6 +68,9 @@ model ComponentImpl {
   component     Component @relation(fields: [componentName], references: [name])
   componentName String // TODO: Should this be optional to allow for implementation-specific components?
 
+  // Link to the Storybook or Lookbook example
+  componentBookUrl String?
+
   // Framework used to implement the component
   framework ComponentFrameworkEnum
 
@@ -71,7 +80,7 @@ model ComponentImpl {
   // Additional details about the status
   // statusMessage String?
 
-  // Link to the source code for the component in GitHub
+  // Link to the source code for the component in GitHub or Figma
   source String?
 
   @@unique([componentName, framework])
@@ -91,6 +100,13 @@ enum ComponentImplStatusEnum {
   BETA
   STABLE
   DEPRECATED
+}
+
+enum TokenType {
+  COLOR
+  DIMENSION
+  DURATION
+  TYPOGRAPHY
 }
 
 // Proposed statuses:
@@ -114,6 +130,9 @@ model Octicon {
 
   // A description of the octicon
   description String?
+
+  // The SVG code for the octicon (this is just faked with unicode chars right now)
+  svgPathString String?
 
   // Components that use this octicon
   usedByComponents Component[]
