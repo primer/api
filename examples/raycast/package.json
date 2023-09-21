@@ -20,7 +20,7 @@
   "dependencies": {
     "@raycast/api": "^1.38.2",
     "change-case": "^4.1.2",
-    "graphql": "^16.5.0",
+    "graphql": "^16.8.1",
     "graphql-request": "^4.3.0",
     "node-fetch": "^3.0.0"
   },
