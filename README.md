@@ -1,6 +1,7 @@
 # Primer API
 
-> **Warning**: Experimental. Not production ready.
+> **Warning**: ⚠️ This repository is being sunset and is no longer actively maintained. It was part of an internal experiment and is not likely in active use. Please consider migrating to alternative solutions or repositories. 
+
 
 A [GraphQL](https://graphql.org/) API for collecting and accessing data about the [Primer Design System](https://primer.style)
 
